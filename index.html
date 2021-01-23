@@ -16,34 +16,23 @@
       <input type="button" onclick="myFunction()" value="Replace & Copy">
     </form>
 
-<!--     <p>Click the button to change the value of the text field.</p> -->
-<!--     <p>Replaced Text: </p> -->
-<!--     <a id="replaced-text" href="#" target="_blank"/> -->
-    
-
-    <!-- Script to replace text -->
+    <!-- Script to replace and copy text -->
     <script>
       function myFunction() {
         var text2replace = document.getElementById("text-to-replace").value;
         var noQueryUrl   = text2replace.split("?")[0];
         var replacedText = noQueryUrl.replace("preview", "i");
-        // document.getElementById("replaced-text").innerHTML = replacedText;
-        // document.getElementById("replaced-text").href = replacedText;
         
-        var textarea = document.createElement('textarea');
-        textarea.textContent = replacedText;
+        var textarea = document.createElement('input');
+        textarea.id = "text2copy";
+        textarea.value = replacedText;
         document.body.appendChild(textarea);
 
-        var selection = document.getSelection();
-        var range = document.createRange();
-        //  range.selectNodeContents(textarea);
-        range.selectNode(textarea);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        
-        document.execCommand('copy');
+        var copyText = document.getElementById("text2copy");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+
         alert('copy success', document.execCommand('copy'));
-        selection.removeAllRanges();
 
         document.body.removeChild(textarea);
       }
