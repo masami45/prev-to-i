@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+  </head>  
+  <body>
+    <h1>Reddit Preview Image Link Replacer</h1>
+    <p>Replacing preview link from <b>preview.redd.it</b> to <b>i.redd.it</b>.</p>
+    
+    <form id="myForm">
+      Preview Link: <input type="text" id="text-to-replace" value="">
+      <input type="button" onclick="myFunction()" value="Replace & Copy">
+    </form>
+
+<!--     <p>Click the button to change the value of the text field.</p> -->
+<!--     <p>Replaced Text: </p> -->
+<!--     <a id="replaced-text" href="#" target="_blank"/> -->
+    
+
+    <!-- Script to replace text -->
+    <script>
+      function myFunction() {
+        var text2replace = document.getElementById("text-to-replace").value;
+        var noQueryUrl   = text2replace.split("?")[0];
+        var replacedText = noQueryUrl.replace("preview", "i");
+        // document.getElementById("replaced-text").innerHTML = replacedText;
+        // document.getElementById("replaced-text").href = replacedText;
+        
+        var textarea = document.createElement('textarea');
+        textarea.textContent = replacedText;
+        document.body.appendChild(textarea);
+
+        var selection = document.getSelection();
+        var range = document.createRange();
+        //  range.selectNodeContents(textarea);
+        range.selectNode(textarea);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        document.execCommand('copy');
+        alert('copy success', document.execCommand('copy'));
+        selection.removeAllRanges();
+
+        document.body.removeChild(textarea);
+      }
+      
+      var form = document.getElementById("myForm");
+      function handleForm(event) { event.preventDefault(); } 
+      form.addEventListener('submit', handleForm);
+    </script>
+  </body>
+</html>
