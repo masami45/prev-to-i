@@ -12,7 +12,7 @@
     <p>Replacing preview link from <b>preview.redd.it</b> to <b>i.redd.it</b>.</p>
     
     <form id="myForm">
-      Preview Link: <input type="text" id="text-to-replace" value="">
+      Preview Link: <input type="text" id="text-to-replace" value="" onclick="this.select();">
       <input type="button" onclick="myFunction()" value="Replace & Copy">
     </form>
 
@@ -32,8 +32,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999);
 
-        alert('copy success', document.execCommand('copy'));
-
+        document.execCommand('copy')
         document.body.removeChild(textarea);
       }
       
